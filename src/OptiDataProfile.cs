@@ -14,7 +14,7 @@ namespace DeaneBarker.Optimizely
 
 		// This will get created and configured one time per instance
 		// (This might be sub-optimal. I might not understand HttpClient very well.)
-		private HttpClient client = null;
+		private HttpClient client = new();
 
 		// This is the local cache for the data profile attributes
 		// They are all loaded here when the object is instantiated
