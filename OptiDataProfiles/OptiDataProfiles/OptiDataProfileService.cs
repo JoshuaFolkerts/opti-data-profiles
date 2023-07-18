@@ -4,7 +4,7 @@ using System.Text.Json;
 
 namespace OptiDataProfiles;
 
-public class OptiDataProfileService : IOptiDataProfileService
+public class OptiDataProfileService : IOptiDataProfileService, IDisposable
 {
     private readonly OptiDataProfileOptions _options;
 
@@ -33,5 +33,13 @@ public class OptiDataProfileService : IOptiDataProfileService
         });
 
         return _httpClient.PostAsync("/", json).Result;
+    }
+
+    public void Dispose()
+    {
+        if (_httpClient != null)
+        {
+            _httpClient.Dispose();
+        }
     }
 }
