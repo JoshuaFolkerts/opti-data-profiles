@@ -4,7 +4,7 @@ using System.Text.Json;
 namespace DeaneBarker.Optimizely
 {
 
-	public class OptiDataProfile
+	public class OptiDataProfile : IDisposable
 	{
 		public static string KeyField { get; set; }
 		public static string ApiKey { get; set; }
@@ -14,7 +14,7 @@ namespace DeaneBarker.Optimizely
 
 		// This will get created and configured one time per instance
 		// (This might be sub-optimal. I might not understand HttpClient very well.)
-		private HttpClient client = null;
+		private HttpClient client = new();
 
 		// This is the local cache for the data profile attributes
 		// They are all loaded here when the object is instantiated
@@ -156,4 +156,8 @@ namespace DeaneBarker.Optimizely
 			return new OptiDataProfile(id);
 		}
 	}
+  	public void Dispose()
+    	{
+        	client.Dispose();
+    	}
 }
